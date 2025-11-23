@@ -909,7 +909,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // 显示导入结果
         const importedNodes = workflow.nodes.length
         const importedConnections = workflow.connections.length
-        alert(`工作流导入成功！\n- 导入节点：${nodes.length}/${importedNodes}\n- 导入连接：${jsPlumbInstance.getConnections().length}/${importedConnections}`)
+        //alert(`工作流导入成功！\n- 导入节点：${nodes.length}/${importedNodes}\n- 导入连接：${jsPlumbInstance.getConnections().length}/${importedConnections}`)
     }
 
     // 运行工作流
@@ -2535,6 +2535,12 @@ window.addSuggestedNode = function (sourceNodeId, nodeType) {
             window.workflowAPI.jsPlumbInstance.connect({
                 source: sourceElement,
                 target: targetElement,
+                endpoint: ["Dot", { radius: 5 }],
+                // 明确指定从源节点的右侧端点连接到目标节点的左侧端点
+                anchors: ["Right", "Left"],
+                // 确保符合源/目标设置
+                isSource: true,
+                isTarget: true,
             })
         }
     }, 100)
@@ -2713,6 +2719,12 @@ function createConnections(workflow, createdNodes) {
             const connection = window.workflowAPI.jsPlumbInstance.connect({
                 source: sourceNode.id,
                 target: targetNode.id,
+                endpoint: ["Dot", { radius: 5 }],
+                // 明确指定从源节点的右侧端点连接到目标节点的左侧端点
+                anchors: ["Right", "Left"],
+                // 确保符合源/目标设置
+                isSource: true,
+                isTarget: true,
             })
             
             // 连接线动画效果
